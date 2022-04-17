@@ -19,6 +19,21 @@ const ThoughtForm = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
+    const postData = async () => {
+      // Second parameter gives us the POST method. Otherwise it's defaulted to GET
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
+      const data = await res.json();
+      console.log(data);
+    };
+    postData();
+
     // clear form value
     setFormState({ username: "", thought: "" });
     setCharacterCount(0);
