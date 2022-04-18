@@ -34,11 +34,12 @@ router.get("/users/:username", (req, res) => {
       "#un": "username",
       "#ca": "createdAt",
       "#th": "thought",
+      "#img": "image", // add the image attribute alias
     },
     ExpressionAttributeValues: {
       ":user": req.params.username,
     },
-    ProjectionExpression: "#un, #th, #ca", //similar to SELECT in SQL
+    ProjectionExpression: "#un, #th, #ca, #img", //similar to SELECT in SQL
     ScanIndexForward: false, //default is true which is ascending order
   };
   // Query to return specific username
@@ -61,6 +62,7 @@ router.post("/users", (req, res) => {
       username: req.body.username,
       createdAt: Date.now(),
       thought: req.body.thought,
+      image: req.body.image, // add new image attribute
     },
   };
   //dynamodb PUT is used to add to table
